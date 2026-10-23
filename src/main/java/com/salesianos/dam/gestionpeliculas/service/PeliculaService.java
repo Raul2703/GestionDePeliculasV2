@@ -1,5 +1,6 @@
 package com.salesianos.dam.gestionpeliculas.service;
 
+
 import com.salesianos.dam.gestionpeliculas.dto.PeliculaRequestDto;
 import com.salesianos.dam.gestionpeliculas.error.notfound.ActorNoEncontradoException;
 import com.salesianos.dam.gestionpeliculas.error.notfound.DirectorNoEncontradoException;
@@ -13,6 +14,9 @@ import com.salesianos.dam.gestionpeliculas.repo.PeliculaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.salesianos.dam.gestionpeliculas.error.ActorYaEnRepartoException;
+import com.salesianos.dam.gestionpeliculas.error.PeliculaYaExisteException;
+
 
 import java.util.List;
 
@@ -36,8 +40,11 @@ public class PeliculaService {
         return peliculaRepository.findById(id)
                 .orElseThrow(() -> new PeliculaNoEncontradaException(id));
     }
-
     public Pelicula add(PeliculaRequestDto dto) {
+        if (peliculaRepository.existsByTitulo(dto.titulo())) {
+            throw new PeliculaYaExisteException(dto.titulo());
+        }
+
 
         Director director = directorRepository.findById(dto.directorId())
                 .orElseThrow(() -> new DirectorNoEncontradoException(dto.directorId()));
@@ -53,6 +60,11 @@ public class PeliculaService {
 
         return peliculaRepository.findById(id)
                 .map(p -> {
+
+                    if (!p.getTitulo().equals(dto.titulo())
+                            && peliculaRepository.existsByTitulo(dto.titulo())) {
+                        throw new PeliculaYaExisteException(dto.titulo());
+                    }
                     p.setTitulo(dto.titulo());
                     p.setGenero(dto.genero());
                     p.setFechaEstreno(dto.fechaEstreno());
@@ -71,6 +83,10 @@ public class PeliculaService {
         Pelicula p = getById(peliculaId);
         Actor a = actorRepository.findById(actorId)
                 .orElseThrow(() -> new ActorNoEncontradoException(actorId));
+
+        if (p.getActores().contains(a)) {
+            throw new ActorYaEnRepartoException(actorId, peliculaId);
+        }
 
         p.getActores().add(a);
         return peliculaRepository.save(p);
