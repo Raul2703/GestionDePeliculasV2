@@ -43,6 +43,14 @@ public class PeliculaController {
         return ResponseEntity.ok(PeliculaResponseDto.of(peliculaService.update(id, dto)));
     }
 
+    @PostMapping("/{peliculaId}/actores/{actorId}")
+    public ResponseEntity<PeliculaResponseDto> addActor(
+            @PathVariable Long peliculaId,
+            @PathVariable Long actorId) {
+        return ResponseEntity.status(201)
+                .body(PeliculaResponseDto.of(peliculaService.addActor(peliculaId, actorId)));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         peliculaService.delete(id);
