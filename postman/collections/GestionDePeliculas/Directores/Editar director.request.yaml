@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/directores/1"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nombre": "Christopher Nolan",
+      "anioNacimiento": 1970
+    }
+order: 6000

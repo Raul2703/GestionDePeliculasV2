@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/peliculas/1/actores/3"
+method: POST
+order: 1000

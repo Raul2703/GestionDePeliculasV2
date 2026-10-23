@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/peliculas/1"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "titulo": "Origen",
+      "genero": "Thriller",
+      "fechaEstreno": "2010-07-16",
+      "directorId": 1
+    }
+order: 9000

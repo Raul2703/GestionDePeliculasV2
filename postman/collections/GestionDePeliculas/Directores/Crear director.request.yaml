@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/directores"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nombre": "Greta Gerwig",
+      "anioNacimiento": 1983
+    }
+order: 4000

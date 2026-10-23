@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/peliculas"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "titulo": "Demasiado pronto",
+      "genero": "Drama",
+      "fechaEstreno": "1980-01-01",
+      "directorId": 1
+    }
+order: 7000

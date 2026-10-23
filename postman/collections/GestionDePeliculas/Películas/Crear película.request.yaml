@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/peliculas"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "titulo": "Interstellar",
+      "genero": "Ciencia ficción",
+      "fechaEstreno": "2014-11-07",
+      "directorId": 1
+    }
+order: 4000

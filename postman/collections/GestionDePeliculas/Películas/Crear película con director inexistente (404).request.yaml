@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/peliculas"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "titulo": "Sin director",
+      "genero": "Drama",
+      "fechaEstreno": "2020-01-01",
+      "directorId": 999
+    }
+order: 6000
