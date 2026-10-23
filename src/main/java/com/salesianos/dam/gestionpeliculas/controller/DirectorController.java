@@ -3,9 +3,11 @@ package com.salesianos.dam.gestionpeliculas.controller;
 import com.salesianos.dam.gestionpeliculas.dto.DirectorRequestDto;
 import com.salesianos.dam.gestionpeliculas.dto.DirectorResponseDto;
 import com.salesianos.dam.gestionpeliculas.service.DirectorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class DirectorController {
     }
 
     @PostMapping
-    public ResponseEntity<DirectorResponseDto> create(@RequestBody DirectorRequestDto dto) {
+    public ResponseEntity<DirectorResponseDto> create(@Valid @RequestBody DirectorRequestDto dto) {
         return ResponseEntity.status(201)
                 .body(DirectorResponseDto.of(directorService.add(dto)));
     }
@@ -39,7 +41,7 @@ public class DirectorController {
     @PutMapping("/{id}")
     public ResponseEntity<DirectorResponseDto> update(
             @PathVariable Long id,
-            @RequestBody DirectorRequestDto dto) {
+            @Valid @RequestBody DirectorRequestDto dto) {
         return ResponseEntity.ok(DirectorResponseDto.of(directorService.update(id, dto)));
     }
 

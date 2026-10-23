@@ -3,9 +3,11 @@ package com.salesianos.dam.gestionpeliculas.controller;
 import com.salesianos.dam.gestionpeliculas.dto.ActorRequestDto;
 import com.salesianos.dam.gestionpeliculas.dto.ActorSimpleDto;
 import com.salesianos.dam.gestionpeliculas.service.ActorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class ActorController {
     }
 
     @PostMapping
-    public ResponseEntity<ActorSimpleDto> create(@RequestBody ActorRequestDto dto) {
+    public ResponseEntity<ActorSimpleDto> create(@Valid @RequestBody ActorRequestDto dto) {
         return ResponseEntity.status(201)
                 .body(ActorSimpleDto.of(actorService.add(dto)));
     }

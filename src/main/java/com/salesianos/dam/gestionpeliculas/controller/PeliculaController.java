@@ -3,9 +3,11 @@ package com.salesianos.dam.gestionpeliculas.controller;
 import com.salesianos.dam.gestionpeliculas.dto.PeliculaRequestDto;
 import com.salesianos.dam.gestionpeliculas.dto.PeliculaResponseDto;
 import com.salesianos.dam.gestionpeliculas.service.PeliculaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class PeliculaController {
     }
 
     @PostMapping
-    public ResponseEntity<PeliculaResponseDto> create(@RequestBody PeliculaRequestDto dto) {
+    public ResponseEntity<PeliculaResponseDto> create(@Valid @RequestBody PeliculaRequestDto dto) {
         return ResponseEntity.status(201)
                 .body(PeliculaResponseDto.of(peliculaService.add(dto)));
     }
@@ -39,7 +41,7 @@ public class PeliculaController {
     @PutMapping("/{id}")
     public ResponseEntity<PeliculaResponseDto> update(
             @PathVariable Long id,
-            @RequestBody PeliculaRequestDto dto) {
+            @Valid @RequestBody PeliculaRequestDto dto) {
         return ResponseEntity.ok(PeliculaResponseDto.of(peliculaService.update(id, dto)));
     }
 

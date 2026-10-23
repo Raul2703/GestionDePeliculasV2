@@ -1,13 +1,22 @@
 package com.salesianos.dam.gestionpeliculas.dto;
 
 import com.salesianos.dam.gestionpeliculas.model.Pelicula;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
 public record PeliculaRequestDto(
+        @NotBlank(message = "{peliculaRequestDto.titulo.notBlank}")
         String titulo,
+
+        @NotBlank(message = "{peliculaRequestDto.genero.notBlank}")
         String genero,
+
+        @NotNull(message = "{peliculaRequestDto.fechaEstreno.notNull}")
         LocalDate fechaEstreno,
+
+        @NotNull(message = "{peliculaRequestDto.directorId.notNull}")
         Long directorId
 ) {
 
